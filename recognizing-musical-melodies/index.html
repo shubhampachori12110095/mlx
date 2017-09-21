@@ -10,7 +10,7 @@
 
     <!--Description-->
     
-        <meta name="description" content="A blog for machine learning.">
+        <meta name="description" content="A blog for machine learning experiments.">
     
 
     <!--Author-->
@@ -25,7 +25,7 @@
 
     <!--Open Graph Description-->
     
-        <meta property="og:description" content="A blog for machine learning." />
+        <meta property="og:description" content="A blog for machine learning experiments." />
     
 
     <!--Open Graph Site Name-->
@@ -139,7 +139,7 @@
 <header class="intro-header" style="background-image: url('/mlx/img/bg.jpg')">
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="col-md-9">
                 <div class="post-heading">
                     <h1>Recognizing Musical Melodies for Secure Audio Pairing</h1>
                     
@@ -150,7 +150,7 @@
                     <span class="meta">
                         <!-- Date and Author -->
                         
-                            Posted by Pranav Rajpurkar, Brad Girardeau on
+                            By Pranav Rajpurkar, Brad Girardeau on
                         
                         October 2nd 2016
                     </span>
@@ -164,29 +164,10 @@
 <article>
     <div class="container">
         <div class="row">
-
-            <!-- Tags and categories -->
-           
-                <div class="col-lg-4 col-lg-offset-2 col-md-5 col-md-offset-1 post-tags">
-                    
-                        
-
-
-<a href="/mlx/tags/security/">#security</a>
-
-
-                    
-                </div>
-                <div class="col-lg-4 col-md-5 post-categories">
-                    
-                </div>
-            
-
             <!-- Gallery -->
             
-
             <!-- Post Main Content -->
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="col-md-9">
                 <p>In this post, we share our work at the intersection of machine learning and security. We look at <em>secure device pairing</em>, a task in which we are trying to establish a secure connection between two devices wirelessly. We establish a protocol in which the devices can be paired securely if each device can recognize a melody played by the other. To enable this application, we build a machine learning system that can perform melody recognition. </p>
 <p>We begin this post with a focus on the security application: describing the secure device pairing problem, highlighting drawbacks of existing solutions, and finally demonstrating how an audio-based pairing approach can be used to overcome them. In the second half of the post, we focus on the machine learning task of melody recognition: sharing our experience exploring different approaches to the task, and detailing a solution that performs well even in noisy environments.</p>
 <p>Listen to the melody below, which consists of 8-notes played in sequence (in a noisy environment) – can you identify any of them? The system we build later in the post gets them all right.</p>
@@ -234,13 +215,7 @@
 <h1 id="In-Summary"><a href="#In-Summary" class="headerlink" title="In Summary"></a>In Summary</h1><p>We have described a simple machine learning approach to recognize musical melodies with a concrete application in secure audio pairing. For the learning system, we use a sliding window to break a large chunk of audio into smaller segments, run a Recurrent Neural Network – which captures temporal properties of audio – over each of those segments to make segment-level predictions, and finally use Non-Maximum Suppression to postprocess the outputs. This system is a part of a security protocol which involves devices establishing a secure connection with each other by playing a short audio sequence, which the other device must recognize.</p>
 <p><em>This is work done at Stanford University, advised by Professor Dan Boneh</em></p>
 
-
                 
-            </div>
-
-            <!-- Comments -->
-            
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     
     <hr />
     <h3>Comments:</h3>
@@ -250,11 +225,70 @@
 
 
 
-                </div>
-            
+                
+            </div>
+            <div class="col-md-3">
+                <h2> Also Read </h2>
+                <hr>
+                
+                    <div class="post-preview">
+    <a href="/mlx/deep-pathology/">
+        <h1 class="post-title archive">
+            Deep Learning For Pathology
+        </h1>
+    </a>
+    <p class="post-meta archive">
+        <!-- Date and Author -->
+        
+        September 19th 2017
+    </p>
+</div>
+                
+                    <div class="post-preview">
+    <a href="/mlx/visualizing-cnns/">
+        <h1 class="post-title archive">
+            Visualizing A Convolutional Neural Network's Predictions
+        </h1>
+    </a>
+    <p class="post-meta archive">
+        <!-- Date and Author -->
+        
+            Posted by Pranav Rajpurkar on
+        
+        September 18th 2017
+    </p>
+</div>
+                
+                    <div class="post-preview">
+    <a href="/mlx/arrhythmia-detection/">
+        <h1 class="post-title archive">
+            Arrhythmia Detection
+        </h1>
+    </a>
+    <p class="post-meta archive">
+        <!-- Date and Author -->
+        
+            Posted by Pranav Rajpurkar on
+        
+        September 13th 2017
+    </p>
+</div>
+                
+                <hr>
+                
+                    
+
+
+<a href="/mlx/tags/security/">#security</a>
+
+
+                
+            </div>
         </div>
     </div>
 </article>
+
+
 
     <!-- Footer -->
     <hr />

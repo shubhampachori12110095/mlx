@@ -10,7 +10,7 @@
 
     <!--Description-->
     
-        <meta name="description" content="A blog for machine learning.">
+        <meta name="description" content="A blog for machine learning experiments.">
     
 
     <!--Author-->
@@ -25,7 +25,7 @@
 
     <!--Open Graph Description-->
     
-        <meta property="og:description" content="A blog for machine learning." />
+        <meta property="og:description" content="A blog for machine learning experiments." />
     
 
     <!--Open Graph Site Name-->
@@ -139,7 +139,7 @@
 <header class="intro-header" style="background-image: url('/mlx/img/bg.jpg')">
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="col-md-9">
                 <div class="post-heading">
                     <h1>Visualizing A Convolutional Neural Network's Predictions</h1>
                     
@@ -150,7 +150,7 @@
                     <span class="meta">
                         <!-- Date and Author -->
                         
-                            Posted by Pranav Rajpurkar on
+                            By Pranav Rajpurkar on
                         
                         September 18th 2017
                     </span>
@@ -164,20 +164,15 @@
 <article>
     <div class="container">
         <div class="row">
-
-            <!-- Tags and categories -->
-           
-
             <!-- Gallery -->
             
-
             <!-- Post Main Content -->
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="col-md-9">
                 <p>Visualizations can confer useful information about what a network is learning. When building a Convolutional Neural Network to identify objects in images, we might want to be able to interpret the model’s predictions. For example, we might want to explain why the network classifies a particular image as a spaceship. In this post, we look at papers that introduce visualization techniques for CNN-based image classification models. </p>
 <p>We first look at <a href="https://arxiv.org/pdf/1312.6034.pdf">Deep Inside Convolutional Networks: Visualising Image Classification Models and Saliency Maps</a></p>
 <p>This paper introduces two ideas for visualizing the workings of the neural network. Both of them require computing of the gradient of the output with respect to the input image.</p>
 <p><strong>Class Model Visualization</strong>: The task here is to generate an image which will best represent a category. <em>Think: what’s the image that looks most like a spaceship to the neural network?</em>. We’re going to find the image $I$ which maximizes the score $S_c(I)$ the network assigns to category $c$; mathematically: $\mathtt{argmax}_I \space S_c(I)$.</p>
-<p><em>Note: the score $S_c(I)$ is the score that the neural network assigns to a class </em>before* the softmax, not the probability $P_c = \frac{e^{S_c}}{\sum_c e^{S_c}}$</p>
+<p><em>Note:</em> the score $S_c(I)$ is the score that the neural network assigns to a class <em>before</em> the softmax, not the probability $P_c = \frac{e^{S_c}}{\sum_c e^{S_c}}$</p>
 <p>We can start off with some image $I$, compute the gradient with respect to $I$ using back-propagation, and then use gradient ascent to find a better $I$, repeating the process until we find a locally optimal $I$. This is very similar to the optimization process for training a neural network, but instead of optimizing the weights, we’re optimizing the image, keeping the weights fixed.</p>
 <img src="/mlx/visualizing-cnns/class_model_vis.png" alt="Class model visualizations for 3 different classes. Source: https://arxiv.org/pdf/1312.6034.pdf." title="Class model visualizations for 3 different classes. Source: https://arxiv.org/pdf/1312.6034.pdf."><span class="image-caption">Class model visualizations for 3 different classes. Source: https://arxiv.org/pdf/1312.6034.pdf.</span>
 <p><strong>Class Saliency in an Image</strong>: The goal here is to find the pixels of an image which contribute most towards a particular classification. <em>Think: what pixels in this image are most important for the neural network to classify it as an image of a spaceship.</em> We’re going to take the derivative of the class score $S_c$ with respect to the input image space $I$, and evaluate at our image $I_0$; mathematically: $\frac{\partial S_c}{\partial I}\bigr\rvert_{I_0}$.</p>
@@ -196,13 +191,7 @@
 <img src="/mlx/visualizing-cnns/class_activation_maps.png" alt="Class-activation maps generated for the top-5 predicted classes with their associated class probabilities. Source: https://arxiv.org/pdf/1512.04150.pdf" title="Class-activation maps generated for the top-5 predicted classes with their associated class probabilities. Source: https://arxiv.org/pdf/1512.04150.pdf"><span class="image-caption">Class-activation maps generated for the top-5 predicted classes with their associated class probabilities. Source: https://arxiv.org/pdf/1512.04150.pdf</span>
 <p><em>What’s cool about this?</em> One forward pass can compute both the saliency map and the classification of the image. In fact, we can arrive at the class score from the class activation map $S_c = \sum_{i, j} M_c(i,j)$. Additionally, this method produces visually better maps than those produced by the back-propagation method of the previous paper.</p>
 
-
                 
-            </div>
-
-            <!-- Comments -->
-            
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     
     <hr />
     <h3>Comments:</h3>
@@ -212,11 +201,70 @@
 
 
 
-                </div>
-            
+                
+            </div>
+            <div class="col-md-3">
+                <h2> Also Read </h2>
+                <hr>
+                
+                    <div class="post-preview">
+    <a href="/mlx/deep-pathology/">
+        <h1 class="post-title archive">
+            Deep Learning For Pathology
+        </h1>
+    </a>
+    <p class="post-meta archive">
+        <!-- Date and Author -->
+        
+        September 19th 2017
+    </p>
+</div>
+                
+                    <div class="post-preview">
+    <a href="/mlx/arrhythmia-detection/">
+        <h1 class="post-title archive">
+            Arrhythmia Detection
+        </h1>
+    </a>
+    <p class="post-meta archive">
+        <!-- Date and Author -->
+        
+            Posted by Pranav Rajpurkar on
+        
+        September 13th 2017
+    </p>
+</div>
+                
+                    <div class="post-preview">
+    <a href="/mlx/treatment-effects/">
+        <h1 class="post-title archive">
+            Treatment Effects with Decision Trees
+        </h1>
+    </a>
+    <p class="post-meta archive">
+        <!-- Date and Author -->
+        
+            Posted by Pranav Rajpurkar on
+        
+        September 6th 2017
+    </p>
+</div>
+                
+                <hr>
+                
+                    
+
+
+<a href="/mlx/tags/visualization/">#visualization</a>
+
+
+                
+            </div>
         </div>
     </div>
 </article>
+
+
 
     <!-- Footer -->
     <hr />
