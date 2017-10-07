@@ -20,7 +20,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="Survival Analysis"/>
+        <meta property="og:title" content="Cardiotoxicity Prediction"/>
     
 
     <!--Open Graph Description-->
@@ -50,7 +50,7 @@
 
     <!-- Title -->
     
-    <title>Survival Analysis - mlx</title>
+    <title>Cardiotoxicity Prediction - mlx</title>
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/mlx/bower_components/bootstrap/dist/css/bootstrap.min.css">
@@ -141,7 +141,7 @@
         <div class="row">
             <div class="col-md-9">
                 <div class="post-heading">
-                    <h1>Survival Analysis</h1>
+                    <h1>Cardiotoxicity Prediction</h1>
                     
                     <h2 class="post-subheading">
                         Learnings from a few papers
@@ -150,9 +150,9 @@
                     <span class="meta">
                         <!-- Date and Author -->
                         
-                            By Pranav Rajpurkar on
+                            By Jeremy Irvin, Pranav Rajpurkar on
                         
-                        September 3rd 2017
+                        October 7th 2017
                     </span>
                 </div>
             </div>
@@ -168,31 +168,30 @@
             
             <!-- Post Main Content -->
             <div class="col-md-9">
-                <p>Survival analysis concerns itself with predicting the time until the occurrence of an event, such as death, or onset of a disease. We’ll look at a few papers on survival analysis.</p>
-<p>The first paper we’ll take a look at is <a href="http://stm.sciencemag.org/content/7/299/299ra122">A targeted real-time early warning score (TREWScore) for septic shock</a>.</p>
+                <p>Chemotherapy, or the use of anticancer drugs, remains one of the most common and effective cancer treatments used today. However, the intense anticancer regimen can take its toll on the body, causing substantial health complications during and after treatment. One frequent side effect of anticancer medication is severe heart damage, a phenomenon known as cardiotoxicity. </p>
+<p>Cardiotoxicity is a condition when there is damage to the heart muscle, and as a result, the heart is not able to pump blood effectively to the rest of the body. Over time, the kidneys may respond by causing the body to retain fluid, causing congestion, leading to a condition known as Congestive Heart Failure. An echocardiogram test allows doctors to make a calculation of how well the heart pumps blood with each beat, called the ejection fraction (EF). Most times, EF refers to the amount of blood being pumped out of the left ventricle of the heart each time it contracts, also called Left Ventricular Ejection Fraction (LVEF).</p>
+<p>In this post, we share our learnings from three recent papers that provide insight into the some methods for detection of cardiotoxicity.</p>
+<p>The first paper we look at is <a href="https://www.ncbi.nlm.nih.gov/pubmed/25948538">Early detection of anthracycline cardiotoxicity and improvement with heart failure therapy (Cardinale et al. 2015)</a>.<br>The paper proposes that early detection and treatment of cardiotoxicity, even when asymptomatic, is critical for cardiac function recovery and for reduction of associated adverse cardiac events.</p>
 <ul>
-<li>This paper identifies sepsis (the presence in tissues of harmful bacteria and their toxins) and septic shock (low blood pressure due to sepsis) as important to identify and treat early. Their goal is to build a prediction model that uses EHR data to “predict septic shock with high sensitivity and specificity many hours before onset” for patients identified as having sepsis.</li>
-<li>The authors point out that predictive methods need to account for the censoring effects of clinical intervention on patient outcomes: if a patient would have developed septic shock, but was treated beforehand, the patient would be treated as a negative case. Therefore, “methods that assume that these patients are negative [cases] … can yield scores that underestimate the probability of a positive outcome.” If a patient with severe sepsis received treatment for septic shock but never developed shock, they are referred to as <strong>right-censored after treatment</strong>; if they experienced septic shock after receiving treatment for septic shock, they’re called <strong>interval-censored</strong>.</li>
-<li>The work develops a TREWScore, “obtained by training a model that estimates the time to an adverse event using supervised learning.” For each individual, the risk of septic shock is calculated at each time point to get a risk trajectory; an individual is “identified as being at high risk of septic shock if his or her risk trajectory ever rose above the detection threshold before the onset of septic shock.”</li>
-<li>A Cox proportional hazards model, one of the most popular models for survival analysis, is used, with “the time until the onset of septic shock as the supervisory signal” with lasso regularization to “automatically select a sparse subset of features that are most predictive of the labeled; interval censoring is handled using a <a href="https://en.wikipedia.org/wiki/Imputation_(statistics)#Multiple_imputation">multiple imputation approach</a>.</li>
-<li>The model identified patients before the onset of septic shock with an AUC of 0.83, at a median of 28.2 hours before onset, outperforming a baseline metric used to identify medical patients (AUC of 0.73).</li>
+<li>The primary end-point of the study is the time of occurrence of cardiotoxicity. Cardiotoxicity is defined as LVEF decrease &gt;10% units, and below 50% measured against the baseline LVEF before the start of chemotherapy. When patients are diagnosed as cardiotoxic, Heart Failure Therapy is started, and recovery from cardiotoxicity, defined as LVEF increase, is measured.</li>
+<li>A multivariable Cox regression model with forward stepwise selection of variables is built with candidate variables including age, gender, cardiovascular risk factors, cumulative anthracycline dose, mediastinal radiotherapy, left chest radiotherapy, body mass index, year of recruitment, and baseline and final (at the end of chemotherapy) LVEF. The model identifies cumulative anthracycline dose and end-chemotherapy LVEF as associated with cardiotoxicity occurrence after cross-validation.</li>
+<li>The paper notes that previous literature classifies cardiotoxicities into 1) “acute”, showing up after a single dose, or a single course of chemo drugs, 2) “early onset chronic”, the most frequent and clinically relevant, developing within 1 year, and 3) “late onset chronic” developing years, or even decades, after the end of chemotherapy. The paper argues that this classification may be misguided, and proposes that we might be “possibly observing different stages of evolution of the same phenomenon and not three distinct diseases.” </li>
 </ul>
-<p>The next paper we’ll look at is <a href="http://proceedings.mlr.press/v56/Ranganath16.pdf">Deep Survival Analysis</a>.</p>
+<p>The second paper we look at is <a href="https://www.ncbi.nlm.nih.gov/pubmed/26919165">Cardiotoxicity of anticancer treatments: Epidemiology, detection, and management (Curigliano et al. 2016)</a>.<br>This review summarizes recent findings on the use of cardiotoxic cancer therapeutics, namely common adverse events, discovery of cancer therapy-induced cardiovascular damage, the treatment of this damage, and potential cardioprotective agents. Here are a few of the points we found most interesting:</p>
 <ul>
-<li>This paper identifies 2 limitations of traditional approaches to survival analysis: (1) they cannot handle missing covariates (variable that is predictive of the outcome), and (2) they require aligning patients by a starting event such as the onset of condition.</li>
-<li>The works introduces a “joint model for both the covariates and the survival times, where the covariates and survival times are specified conditioned on a latent process” that is based on deep exponential families. Their model, called “Deep Survival Analysis” has the advantage that: (1) it models “covariates and survival time in a Bayesian framework”, thus making it easier to work with the characteristically sparse and censored EHR data and (2) “observations are aligned by their failure time” rather than enforcing an artificial start alignment for patients.</li>
-<li>The algorithm is compared against the Framingham CHD risk score, which estimates the 10-year coronary heart disease risk of an individual based on age, sex, LDL cholesterol, HDL cholesterol, blood pressure, diabetes, and smoking.</li>
-<li>Because the data has censorship (information is incomplete), loss functions like mean-squared-error cannot be used, and a measure like concordance index, also known as the c-index, needs to be used. The concordance measure evaluates the accuracy of the ordering of predicted time.</li>
-<li>On the task of “stratifying patients according to the risk of developing coronary heart disease (CHD)”, the Baseline Framingham Risk Score got a concordance of 65.57%, while Deep Survival Analysis yielded a 73.11% concordance. </li>
+<li>Cardiovascular disease is the second leading cause of long-term disease and death among cancer survivors.</li>
+<li>Decreases in LVEF only occur after substantial cardiac damage, so LVEF measurement is poor for detecting early-stage cardiotoxicity. This aligns with the findings of the previous paper - cardiotoxic effects were generally detected too late, as only 11% of patients experienced a full recovery (i.e. restoration of the LVEF value before beginning chemotherapy). This calls for improved predictors and even better, preventative mechanisms.</li>
+<li>Other imaging tools like MUGA and and MRI are better at early-stage detection. However, MUGA requires radiation exposure and MRI is costly and hard to obtain with frequency, so LVEF remains the current best diagnostic tool used in practice.</li>
+<li>There is work to improve diagnosis through biomarkers, but these are sparsely used in clinical settings due to lack of understanding. There are also efforts to develop cardioprotective treatment, but none have been proven to work for cancer therapy-related cardiotoxicity.</li>
 </ul>
-<p>The last paper we’ll look at is <a href="http://mucmd.org/CameraReadySubmissions/13%5CCameraReadySubmission%5CSubmission%2013%20-%20Forte%20et%20al..pdf">Predicting long-term mortality with first-week post-operative data after Coronary Artery Bypass using Machine Learning models</a></p>
+<p>Finally, we look at <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5391725/">Using recurrent neural network models for early detection of heart failure onset (Choi et al. 2017)</a>, a paper that uses machine learning on EHR data to automatically predict risk of heart failure. While this doesn’t directly tackle prediction of chemotherapy-induced cardiotoxicity, it highlights an approach that could be applied towards that goal.</p>
 <ul>
-<li>This paper compares ML methods to predict 5-year mortality in patients who underwent Coronary Artery Bypass Graft.</li>
-<li>Cox regression is used as a baseline for comparison against a Gradient Boosting Machine (GBM), Random Forest (RF), SVM, weighted-KNN, and linear regression.</li>
-<li>The relative importance of the most important variables for the best RF and GBM models is obtained by excluding that variable and measuring how much accuracy decreases.</li>
-<li>The GBM algorithm is found to be the most accurate (AUC 0.767) followed by RF (AUC 0.760). Cox regression, fitted with a lasso penalty, was the least accurate (AUC 0.644).</li>
+<li>The authors partition an 18-month period of data into an observation window and a prediction window. From the observation window, they obtain a single patient’s history during that period, including diagnoses, prescription orders, performed procedures, etc. For example, the history includes the number of times the patient used a particular medication in the observation window and the number of times the patient underwent a certain procedure during that period. In the prediction window, a model is responsible for predicting whether the patient will develop heart failure, represented as a binary label.</li>
+<li>The main contribution of this work is the use of recurrent neural networks (RNNs) to process temporal patient data. Instead of using a single representation of the patient’s medical history, they represent their history as a sequence of events, where an event may be the arrival of a particular symptom or performance of a certain procedure for example. It is important to note that each patient experiences different sequences of events during the observation window. Fortunately, RNNs are designed to handle variable-length sequences.</li>
+<li>Every patient in their dataset is represented by a sequence of events which amalgamate their medical history during the observation window, along with a label denoting whether the patient will go on to develop heart failure in the prediction window. The authors train RNNs on these sequences to predict whether a patient will be diagnosed with heart failure during the prediction window. They in fact use a variation of the RNN known as the Gated Recurrent Unit (GRU) which has been shown to allow for better information flow across long sequences.</li>
+<li><em>Note: the vectors used as input to the baselines as well as the ones used to represent each vector in the sequence for the RNN model are sparse, meaning they have a lot of entries which are zero (as opposed to dense vectors). The authors propose a solution by pre-training event embeddings, or dense vectors, on all of their medical data using a method known as skip-gram. This model represents each event as a learnable vector such that words that are used in the same contexts have similar representations in vector space (see <a href="https://cs224d.stanford.edu/lecture_notes/notes1.pdf">Stanford’s CS224D notes</a> for more info).</em></li>
+<li>The paper finds that the RNN model outperforms other ML methods (SVMs, kNNs, logistic regression), especially when the observation window is long (12-month vs 9-month), indicating that the RNN can exploit temporal information effectively. In addition, the work also shows that pretraining the medical event vectors using skip-grams improves the performance of all models!</li>
 </ul>
-<p><em>The first two papers were part of the reading list for the MIT course on ML for healthcare (2017) taught by Professor David Sontag. The last paper was part of the Machine Learning For Healthcare Conference (2017).</em></p>
 
                 
                     
@@ -209,21 +208,6 @@
             <div class="col-md-3">
                 <h2> Also Read </h2>
                 <hr>
-                
-                    <div class="post-preview">
-    <a href="/mlx/chemo-cardiotoxicity/">
-        <h1 class="post-title archive">
-            Cardiotoxicity Prediction
-        </h1>
-    </a>
-    <p class="post-meta archive">
-        <!-- Date and Author -->
-        
-            By Jeremy Irvin, Pranav Rajpurkar on
-        
-        October 7th 2017
-    </p>
-</div>
                 
                     <div class="post-preview">
     <a href="/mlx/arrhythmia-detection/">
@@ -252,6 +236,21 @@
             By Pranav Rajpurkar on
         
         September 6th 2017
+    </p>
+</div>
+                
+                    <div class="post-preview">
+    <a href="/mlx/survival-analysis/">
+        <h1 class="post-title archive">
+            Survival Analysis
+        </h1>
+    </a>
+    <p class="post-meta archive">
+        <!-- Date and Author -->
+        
+            By Pranav Rajpurkar on
+        
+        September 3rd 2017
     </p>
 </div>
                 
